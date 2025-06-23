@@ -162,7 +162,7 @@ def main():
     .main .block-container {
         padding-top: 2rem;
         padding-bottom: 2rem;
-        max-width: 90%;
+        max-width: 70%;
     }
     .stDataFrame {
         border: 1px solid #ddd;
