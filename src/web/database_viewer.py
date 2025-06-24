@@ -18,6 +18,13 @@ sys.path.append(str(Path(__file__).parent.parent))
 from data.database import Database
 from web.visualizations import EmailVisualizations, create_dashboard_layout
 
+# Role-based user dictionary
+USERS = {
+    "admin": {"password": "adminpass", "role": "admin"},
+    "abhishek": {"password": "pass123", "role": "analyst"},
+    "prasun": {"password": "pass123", "role": "viewer"},
+    # Add more users as needed
+}
 
 def format_tags(tags):
     """Format tags for display in the table."""
@@ -156,6 +163,61 @@ def main():
         initial_sidebar_state="expanded",
     )
 
+    # --- LOGIN SCREEN ---
+    if "authenticated" not in st.session_state:
+        st.session_state["authenticated"] = False
+    if "role" not in st.session_state:
+        st.session_state["role"] = None
+    if "username" not in st.session_state:
+        st.session_state["username"] = None
+
+    if not st.session_state["authenticated"]:
+        st.title("🔒 Login")
+        username = st.text_input("Username")
+        password = st.text_input("Password", type="password")
+        login_btn = st.button("Login")
+
+        if login_btn:
+            user = USERS.get(username)
+            if user and user["password"] == password:
+                st.session_state["authenticated"] = True
+                st.session_state["role"] = user["role"]
+                st.session_state["username"] = username
+                st.success(f"Login successful! Role: {user['role']}")
+                st.rerun()
+            else:
+                st.error("Invalid username or password")
+        return  # Stop here if not authenticated
+
+    # --- REST OF DASHBOARD CODE BELOW ---
+    # Add custom CSS to fix layout issues
+    st.markdown("""
+    <style>
+    .main .block-container {
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        max-width: 100%;
+    }
+    .stDataFrame {
+        border: 1px solid #ddd;
+        border-radius: 0.5rem;
+    }
+    .stSelectbox {
+        border: 1px solid #ddd;
+        border-radius: 0.5rem;
+    }
+    .stSidebar .sidebar-content {
+        padding: 1rem;
+    }
+    .metric-container {
+        background-color: #f0f2f6;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        margin: 0.5rem 0;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
     st.title("📧 Email Analysis Dashboard")
     st.markdown("---")
 
@@ -200,7 +262,6 @@ def main():
             # Date Range Slider
             min_date = df['email_date'].min().date()
             max_date = df['email_date'].max().date()
-            print(min_date, max_date)
             date_range = st.slider(
                 "Email Date Range",
                 min_value=min_date,
@@ -229,6 +290,13 @@ def main():
             # Add a clear filters button
             if st.button("🗑️ Clear All Filters"):
                 st.experimental_rerun()
+
+            # Add a logout button below the clear filters button
+            if st.button("🚪 Logout"):
+                for key in ["authenticated", "role", "username"]:
+                    if key in st.session_state:
+                        del st.session_state[key]
+                st.rerun()
 
         # Apply filters to DataFrame
         filtered_df = df[
