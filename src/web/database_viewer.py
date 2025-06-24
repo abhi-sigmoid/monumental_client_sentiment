@@ -279,17 +279,18 @@ def main():
                 help="Choose which sentiment categories to include in the results"
             )
 
-            # Classification Filter
-            classification_filter = st.multiselect(
-                "Select categories to display:",
-                options=sorted(df["classification"].unique()),
-                default=sorted(df["classification"].unique()),
-                help="Choose which categories to include in the results"
-            )
+            # Classification Filter (replace multiselect with checkboxes)
+            classification_options = list(Database.VALID_CLASSIFICATIONS)
+            classification_options.sort()
+            selected_classifications = []
+            st.markdown("**Select classifications to display:**")
+            for c in classification_options:
+                if st.checkbox(c, value=True, key=f"class_{c}"):
+                    selected_classifications.append(c)
 
             # Add a clear filters button
             if st.button("🗑️ Clear All Filters"):
-                st.experimental_rerun()
+                st.rerun()
 
             # Add a logout button below the clear filters button
             if st.button("🚪 Logout"):
@@ -301,7 +302,7 @@ def main():
         # Apply filters to DataFrame
         filtered_df = df[
             (df["sentiment"].isin(sentiment_filter))
-            & (df["classification"].isin(classification_filter))
+            & (df["classification"].isin(selected_classifications))
             & (df["email_date"].dt.date >= date_range[0])
             & (df["email_date"].dt.date <= date_range[1])
         ]
