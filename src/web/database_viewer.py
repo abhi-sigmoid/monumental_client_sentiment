@@ -288,10 +288,6 @@ def main():
                 if st.checkbox(c, value=True, key=f"class_{c}"):
                     selected_classifications.append(c)
 
-            # Add a clear filters button
-            if st.button("🗑️ Clear All Filters"):
-                st.rerun()
-
             # Add a logout button below the clear filters button
             if st.button("🚪 Logout"):
                 for key in ["authenticated", "role", "username"]:
