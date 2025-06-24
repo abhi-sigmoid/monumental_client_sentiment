@@ -157,32 +157,32 @@ def main():
     )
 
     # Add custom CSS to fix layout issues
-    st.markdown("""
-    <style>
-    .main .block-container {
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-        max-width: 70%;
-    }
-    .stDataFrame {
-        border: 1px solid #ddd;
-        border-radius: 0.5rem;
-    }
-    .stSelectbox {
-        border: 1px solid #ddd;
-        border-radius: 0.5rem;
-    }
-    .stSidebar .sidebar-content {
-        padding: 1rem;
-    }
-    .metric-container {
-        background-color: #f0f2f6;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        margin: 0.5rem 0;
-    }
-    </style>
-    """, unsafe_allow_html=True)
+    # st.markdown("""
+    # <style>
+    # .main .block-container {
+    #     padding-top: 2rem;
+    #     padding-bottom: 2rem;
+    #     max-width: 70%;
+    # }
+    # .stDataFrame {
+    #     border: 1px solid #ddd;
+    #     border-radius: 0.5rem;
+    # }
+    # .stSelectbox {
+    #     border: 1px solid #ddd;
+    #     border-radius: 0.5rem;
+    # }
+    # .stSidebar .sidebar-content {
+    #     padding: 1rem;
+    # }
+    # .metric-container {
+    #     background-color: #f0f2f6;
+    #     padding: 1rem;
+    #     border-radius: 0.5rem;
+    #     margin: 0.5rem 0;
+    # }
+    # </style>
+    # """, unsafe_allow_html=True)
 
     st.title("📧 Email Analysis Dashboard")
     st.markdown("---")
