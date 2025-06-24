@@ -281,10 +281,10 @@ def main():
 
             # Classification Filter
             classification_filter = st.multiselect(
-                "Select classifications to display:",
+                "Select categories to display:",
                 options=sorted(df["classification"].unique()),
                 default=sorted(df["classification"].unique()),
-                help="Choose which classification categories to include in the results"
+                help="Choose which categories to include in the results"
             )
 
             # Add a clear filters button

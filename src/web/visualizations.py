@@ -110,7 +110,7 @@ class EmailVisualizations:
         return fig
     
     def create_classification_bar_chart(self) -> go.Figure:
-        """Create a horizontal bar chart showing email volume by classification."""
+        """Create a horizontal bar chart showing email volume by categories."""
         classification_counts = self.df['classification'].value_counts()
         
         # Use consistent colors for classifications
@@ -126,9 +126,9 @@ class EmailVisualizations:
         )])
         
         fig.update_layout(
-            title="Email Volume by Classification",
+            title="Email Volume by Categories",
             xaxis_title="Number of Emails",
-            yaxis_title="Classification",
+            yaxis_title="Categories",
             height=500,
             margin=dict(t=50, b=50, l=200, r=50)
         )
@@ -190,9 +190,9 @@ class EmailVisualizations:
         ))
         
         fig.update_layout(
-            title="Sentiment Distribution by Classification (%)",
+            title="Sentiment Distribution by Categories (%)",
             xaxis_title="Sentiment",
-            yaxis_title="Classification",
+            yaxis_title="Categories",
             height=500,
             margin=dict(t=50, b=50, l=200, r=50)
         )
@@ -358,7 +358,7 @@ class EmailVisualizations:
             ))
         
         fig.update_layout(
-            title=f"Classification Trends Over Time ({period.capitalize()})",
+            title=f"Categories Trends Over Time ({period.capitalize()})",
             xaxis_title="Time Period",
             yaxis_title="Number of Emails",
             height=500,
@@ -381,7 +381,7 @@ class EmailVisualizations:
             ))
         
         fig.update_layout(
-            title="Confidence Scores by Classification",
+            title="Confidence Scores by Categories",
             yaxis_title="Confidence Score (%)",
             height=500,
             xaxis_tickangle=-45
