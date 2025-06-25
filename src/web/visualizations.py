@@ -101,7 +101,7 @@ class EmailVisualizations:
         )])
         
         fig.update_layout(
-            title="Email Sentiment Distribution",
+            title="Overall Email Sentiment Distribution",
             showlegend=True,
             height=400,
             margin=dict(t=50, b=50, l=50, r=50)
@@ -161,7 +161,7 @@ class EmailVisualizations:
                 ))
         
         fig.update_layout(
-            title=f"Sentiment Trends Over Time ({period.capitalize()})",
+            title=f"Email Sentiment Trends Over Time ({period.capitalize()})",
             xaxis_title="Time Period",
             yaxis_title="Number of Emails",
             height=400,
@@ -182,7 +182,7 @@ class EmailVisualizations:
             z=cross_tab_pct.values,
             x=cross_tab_pct.columns,
             y=cross_tab_pct.index,
-            colorscale='RdYlGn',  # Red-Yellow-Green scale aligned with sentiment colors
+            colorscale='RdYlGn_r',  # Red-Yellow-Green scale aligned with sentiment colors
             text=cross_tab_pct.values.round(1),
             texttemplate="%{text}%",
             textfont={"size": 12},
@@ -190,7 +190,7 @@ class EmailVisualizations:
         ))
         
         fig.update_layout(
-            title="Sentiment Distribution by Categories (%)",
+            title="Heatmap of Email Sentiment Distribution by Categories (%)",
             xaxis_title="Sentiment",
             yaxis_title="Categories",
             height=500,
@@ -209,7 +209,7 @@ class EmailVisualizations:
         )])
         
         fig.update_layout(
-            title="Confidence Score Distribution",
+            title="Category Classification Confidence Score Distribution",
             xaxis_title="Confidence Score (%)",
             yaxis_title="Number of Emails",
             height=400,
@@ -358,7 +358,7 @@ class EmailVisualizations:
             ))
         
         fig.update_layout(
-            title=f"Categories Trends Over Time ({period.capitalize()})",
+            title=f"Email Categories Trends Over Time ({period.capitalize()})",
             xaxis_title="Time Period",
             yaxis_title="Number of Emails",
             height=500,

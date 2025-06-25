@@ -103,7 +103,7 @@ def display_analytics_dashboard(df):
         st.plotly_chart(viz.create_sentiment_pie_chart(), use_container_width=True)
 
     with col2:
-        st.plotly_chart(viz.create_classification_bar_chart(), use_container_width=True)
+        st.plotly_chart(viz.create_classification_sentiment_heatmap(), use_container_width=True)
 
     # Row 2: Trends
     st.subheader("📈 Temporal Trends")
@@ -129,10 +129,12 @@ def display_analytics_dashboard(df):
     col1, col2 = st.columns(2)
 
     with col1:
-        st.plotly_chart(viz.create_classification_sentiment_heatmap(), use_container_width=True)
+        st.plotly_chart(viz.create_confidence_distribution(), use_container_width=True)
+        
+        
 
     with col2:
-        st.plotly_chart(viz.create_confidence_distribution(), use_container_width=True)
+        st.plotly_chart(viz.create_confidence_by_classification(), use_container_width=True)
 
     # Row 4: Tags and Confidence by Classification
     st.subheader("🏷️ Tag Analysis & Quality Metrics")
@@ -143,7 +145,7 @@ def display_analytics_dashboard(df):
         st.plotly_chart(viz.create_top_tags_bar_chart(), use_container_width=True)
 
     with col2:
-        st.plotly_chart(viz.create_confidence_by_classification(), use_container_width=True)
+        st.plotly_chart(viz.create_classification_bar_chart(), use_container_width=True)
 
     # Word Cloud
     st.subheader("☁️ Tag Word Cloud")
@@ -190,33 +192,6 @@ def main():
         return  # Stop here if not authenticated
 
     # --- REST OF DASHBOARD CODE BELOW ---
-    # Add custom CSS to fix layout issues
-    # st.markdown("""
-    # <style>
-    # .main .block-container {
-    #     padding-top: 2rem;
-    #     padding-bottom: 2rem;
-    #     max-width: 100%;
-    # }
-    # .stDataFrame {
-    #     border: 1px solid #ddd;
-    #     border-radius: 0.5rem;
-    # }
-    # .stSelectbox {
-    #     border: 1px solid #ddd;
-    #     border-radius: 0.5rem;
-    # }
-    # .stSidebar .sidebar-content {
-    #     padding: 1rem;
-    # }
-    # .metric-container {
-    #     background-color: #f0f2f6;
-    #     padding: 1rem;
-    #     border-radius: 0.5rem;
-    #     margin: 0.5rem 0;
-    # }
-    # </style>
-    # """, unsafe_allow_html=True)
 
     st.title("📧 Email Analysis Dashboard")
     st.markdown("---")
@@ -283,7 +258,7 @@ def main():
             classification_options = list(Database.VALID_CLASSIFICATIONS)
             classification_options.sort()
             selected_classifications = []
-            st.markdown("**Select classifications to display:**")
+            st.markdown("**Select Categories to display:**")
             for c in classification_options:
                 if st.checkbox(c, value=True, key=f"class_{c}"):
                     selected_classifications.append(c)
