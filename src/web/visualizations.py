@@ -182,7 +182,7 @@ class EmailVisualizations:
             z=cross_tab_pct.values,
             x=cross_tab_pct.columns,
             y=cross_tab_pct.index,
-            colorscale='RdYlGn_r',  # Red-Yellow-Green scale aligned with sentiment colors
+            colorscale=[[0.0, 'white'], [1.0, 'blue']],  # Steel Blue
             text=cross_tab_pct.values.round(1),
             texttemplate="%{text}%",
             textfont={"size": 12},
